@@ -121,19 +121,19 @@ function translatePage(lang) {
 function getVideoUrl(equipment, alternative) {
     switch (equipment) {
         case 'projector':
-            return 'https://www.youtube.com/embed/YOUR_PROJECTOR_VIDEO_ID';
+            return 'https://www.youtube.com/embed/6EgvwbFcahc';
         case 'battery':
             switch (alternative) {
                 case 'electricity':
-                    return 'https://www.youtube.com/embed/YOUR_BATTERY_ELECTRICITY_VIDEO_ID';
+                    return 'https://www.youtube.com/embed/2T_Cd_B4Vdo';
                 case 'solar':
                     return 'https://www.youtube.com/embed/YOUR_BATTERY_SOLAR_VIDEO_ID';
                 case 'automobileAuxiliary':
                     return 'https://www.youtube.com/embed/YOUR_BATTERY_CAR_CIGARETTE_VIDEO_ID';
                 case 'motorcycleBattery':
-                    return 'https://www.youtube.com/embed/YOUR_BATTERY_MOTORCYCLE_VIDEO_ID';
+                    return 'https://www.youtube.com/embed/XUpQpR0QjyU';
                 case 'carBattery':
-                    return 'https://www.youtube.com/embed/YOUR_BATTERY_CAR_BATTERY_VIDEO_ID';
+                    return 'https://www.youtube.com/embed/o0Qa8p02ddQ';
                 default:
                     return '';
             }
