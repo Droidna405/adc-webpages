@@ -133,7 +133,16 @@ function translatePage(lang) {
         }
     });
     
-    // Special handling for alternative buttons that might be dynamically hidden/shown
+    // Ensure all equipment buttons are translated
+    const equipmentButtons = document.querySelectorAll(".equipment-button");
+    equipmentButtons.forEach(button => {
+        const key = button.dataset.i18n;
+        if (translations[lang] && translations[lang][key]) {
+            button.textContent = translations[lang][key];
+        }
+    });
+    
+    // Special handling for alternative buttons
     const alternativeButtons = document.querySelectorAll(".alternative-button");
     alternativeButtons.forEach(button => {
         const key = button.dataset.i18n || button.dataset.alternative;
