@@ -483,3 +483,63 @@ footer p {
 #batteryAlternatives {
     display: none;
 }
+
+/* Mobile Header Improvements */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: row;
+        padding: 10px;
+        justify-content: space-between;
+    }
+    
+    .header-content h1 {
+        font-size: 1.5em;
+        text-align: right;
+    }
+    
+    .header-content h3 {
+        font-size: 0.9em;
+        text-align: right;
+    }
+    
+    .logo {
+        max-width: 120px;
+    }
+    
+    /* Language toggles as row instead of stacked */
+    .language-links {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin-top: 10px;
+    }
+    
+    .language-links a {
+        padding: 8px;
+        font-size: 0.9em;
+        min-width: 80px;
+        text-align: center;
+    }
+}
+
+/* Button styling for mobile */
+@media (max-width: 768px) {
+    .equipment-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .equipment-button {
+        width: 100%;
+        padding: 12px;
+        margin: 0;
+    }
+    
+    /* Purpose section improved */
+    #purpose p {
+        font-size: 1em;
+        line-height: 1.5;
+        padding: 0 10px;
+    }
+}
