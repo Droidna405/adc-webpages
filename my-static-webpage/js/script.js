@@ -30,7 +30,9 @@ const translations = {
         motorcycleBatteryCharging: "Charging via Motorcycle Battery",
         carBatteryCharging: "Charging via Car Battery",
         purposeTitle: "Purpose of the Site",
-        purposeDescription: "Welcome to our collection of training videos. Our goal is to provide high-quality, field-ready resources for partners."
+        purposeDescription: "Welcome to our collection of training videos. Our goal is to provide high-quality, field-ready resources for partners.",
+        centerTitle: "JF Africa Distribution Center",
+        centerSubtitle: "Ensuring Partners are Well Equipped for the Field"
     },
     fr: {
         home: "Accueil",
@@ -63,7 +65,9 @@ const translations = {
         motorcycleBatteryCharging: "Chargement via la batterie de la moto",
         carBatteryCharging: "Chargement via la batterie de la voiture",
         purposeTitle: "Objectif du Site",
-        purposeDescription: "Bienvenue dans notre collection de vidéos de formation. Notre objectif est de fournir des ressources de haute qualité et prêtes à l'emploi pour nos partenaires."
+        purposeDescription: "Bienvenue dans notre collection de vidéos de formation. Notre objectif est de fournir des ressources de haute qualité et prêtes à l'emploi pour nos partenaires.",
+        centerTitle: "Centre de Distribution JF Afrique",
+        centerSubtitle: "Assurer que les partenaires sont bien équipés pour le terrain"
     },
     pt: {
         home: "Início",
@@ -96,7 +100,9 @@ const translations = {
         motorcycleBatteryCharging: "Carregamento através da bateria da motocicleta",
         carBatteryCharging: "Carregamento através da bateria do carro",
         purposeTitle: "Objetivo do Site",
-        purposeDescription: "Bem-vindo à nossa coleção de vídeos de treinamento. Nosso objetivo é fornecer recursos de alta qualidade e prontos para uso em campo para nossos parceiros."
+        purposeDescription: "Bem-vindo à nossa coleção de vídeos de treinamento. Nosso objetivo é fornecer recursos de alta qualidade e prontos para uso em campo para nossos parceiros.",
+        centerTitle: "Centro de Distribuição JF África",
+        centerSubtitle: "Garantindo que os parceiros estejam bem equipados para o campo"
     }
 };
 

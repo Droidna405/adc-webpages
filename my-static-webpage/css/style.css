@@ -33,41 +33,51 @@ a {
 }
 
 a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 /* Header Styles */
 header {
     background-color: #545454; /* Dark Grey */
     color: #FFFFFF; /* Stark White */
-    padding: 20px 0;
+    padding: 15px 0;
     text-align: center;
 }
 
 header .container {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* Center elements horizontally */
+    width: 80%;
+    margin: 0 auto; /* Ensure the container itself is centered */
+    gap: 20px; /* Create consistent spacing between logo and text */
+}
+
+.header-content {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
 }
 
 header h1 {
-    margin-bottom: 0.5em; /* Space below the main heading */
-    font-size: 2em; /* Larger font size for the title */
+    margin: 0;
+    font-size: 1.8em;
 }
 
 header h3 {
-    color: #FFFFFF; /* Stark White */
-    font-weight: normal; /* Remove bold from the sub-heading */
-    margin-top: 0; /* Remove space above the sub-heading */
-    font-size: 1.2em; /* Adjust font size */
+    color: #FFFFFF;
+    font-weight: normal;
+    margin: 5px 0 0 0;
+    font-size: 1em;
 }
 
 /* Navigation Styles */
 nav {
-    padding: 10px 0;
     width: 100%;
-    background: none; /* Remove background */
+    background: none;
+    margin-top: 15px;
+    text-align: center;
 }
 
 nav ul {
@@ -95,11 +105,13 @@ nav a:hover {
     background-color: #6C6C6C; /* Slightly lighter grey for hover effect */
 }
 
-/* Logo Styles */
+/* Logo Styles with cropping */
 .logo {
-    max-width: 250px; /* Increase the size of the logo */
+    max-width: 300px;
     height: auto;
-    margin-bottom: 15px;
+    object-fit: cover;
+    object-position: center; /* Adjust as needed */
+    display: block;
 }
 
 /* Container Styles */
@@ -396,19 +408,19 @@ footer p {
 }
 
 .alternative-button {
-    background-color: #EF3340; /* Jesus Film Project Red */
+    background-color: #545454; /* Header Grey color */
     color: #FFFFFF; /* Stark White */
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1em;
-    width: 100%; /* Make buttons take up full width of container */
+    width: 30%; /* Reduce width from 100% to 60% */
     box-sizing: border-box; /* Include padding and border in button's width */
 }
 
 .alternative-button:hover {
-    background-color: #CB333B; /* Expressive Red - Medium */
+    background-color: #6C6C6C; /* Slightly lighter grey for hover effect */
 }
 
 /* Purpose Section Styles */
@@ -418,7 +430,7 @@ footer p {
 
 #purposeTitle {
     color: #EF3340; /* Jesus Film Project Red */
-    font-size: 2em; /* Adjust the size as needed */
+    font-size: 1.5em; /* Adjust the size as needed */
     margin-bottom: 0.5em;
 }
 
@@ -466,4 +478,8 @@ footer p {
     .logo {
         max-width: 150px; /* Adjust logo size for very small screens */
     }
+}
+
+#batteryAlternatives {
+    display: none;
 }
