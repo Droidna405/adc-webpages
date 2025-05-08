@@ -32,7 +32,11 @@ const translations = {
         purposeTitle: "Purpose of the Site",
         purposeDescription: "Welcome to our collection of training videos. Our goal is to provide high-quality, field-ready resources for partners.",
         centerTitle: "JF Africa Distribution Center",
-        centerSubtitle: "Ensuring Partners are Well Equipped for the Field"
+        centerSubtitle: "Ensuring Partners are Well Equipped for the Field",
+        watabaScreen: "Wataba Projector Screen",
+        watabaScreenDesc: "Learn how to set up and use the Wataba projector screen.",
+        renewWorldScreen: "Renew World Screen",
+        renewWorldScreenDesc: "Learn how to set up and use the Renew World projector screen."
     },
     fr: {
         home: "Accueil",
@@ -67,7 +71,11 @@ const translations = {
         purposeTitle: "Objectif du Site",
         purposeDescription: "Bienvenue dans notre collection de vidéos de formation. Notre objectif est de fournir des ressources de haute qualité et prêtes à l'emploi pour nos partenaires.",
         centerTitle: "Centre de Distribution JF Afrique",
-        centerSubtitle: "Assurer que les partenaires sont bien équipés pour le terrain"
+        centerSubtitle: "Assurer que les partenaires sont bien équipés pour le terrain",
+        watabaScreen: "Écran de Projecteur Wataba",
+        watabaScreenDesc: "Apprenez à installer et à utiliser l'écran de projecteur Wataba.",
+        renewWorldScreen: "Écran Renew World",
+        renewWorldScreenDesc: "Apprenez à installer et à utiliser l'écran de projecteur Renew World."
     },
     pt: {
         home: "Início",
@@ -102,18 +110,35 @@ const translations = {
         purposeTitle: "Objetivo do Site",
         purposeDescription: "Bem-vindo à nossa coleção de vídeos de treinamento. Nosso objetivo é fornecer recursos de alta qualidade e prontos para uso em campo para nossos parceiros.",
         centerTitle: "Centro de Distribuição JF África",
-        centerSubtitle: "Garantindo que os parceiros estejam bem equipados para o campo"
+        centerSubtitle: "Garantindo que os parceiros estejam bem equipados para o campo",
+        watabaScreen: "Tela de Projetor Wataba",
+        watabaScreenDesc: "Aprenda a configurar e usar a tela de projetor Wataba.",
+        renewWorldScreen: "Tela Renew World",
+        renewWorldScreenDesc: "Aprenda a configurar e usar a tela de projetor Renew World."
     }
 };
 
 let currentLanguage = 'en'; // Default language
 
 function translatePage(lang) {
+    // First store the current language
+    currentLanguage = lang;
+    
+    // Translate all elements with data-i18n attributes
     const elements = document.querySelectorAll('[data-i18n]');
     elements.forEach(element => {
         const key = element.dataset.i18n;
         if (translations[lang] && translations[lang][key]) {
             element.textContent = translations[lang][key];
+        }
+    });
+    
+    // Special handling for alternative buttons that might be dynamically hidden/shown
+    const alternativeButtons = document.querySelectorAll(".alternative-button");
+    alternativeButtons.forEach(button => {
+        const key = button.dataset.i18n || button.dataset.alternative;
+        if (translations[lang] && translations[lang][key]) {
+            button.textContent = translations[lang][key];
         }
     });
 }
@@ -140,11 +165,18 @@ function getVideoUrl(equipment, alternative) {
         case 'wifi':
             return 'https://www.youtube.com/embed/YOUR_WIFI_VIDEO_ID';
         case 'audiobible':
-            return 'https://www.youtube.com/embed/YOUR_AUDIOBIBLE_VIDEO_ID';
+            return 'https://www.youtube.com/embed/K5pTdR2cU5Q';
         case 'tablet':
             return 'https://www.youtube.com/embed/YOUR_TABLET_VIDEO_ID';
         case 'screen':
-            return 'https://www.youtube.com/embed/YOUR_SCREEN_VIDEO_ID';
+            switch (alternative) {
+                case 'watabaScreen':
+                    return 'https://www.youtube.com/embed/9i0uvBHPCRg';
+                case 'renewWorldScreen':
+                    return 'https://www.youtube.com/embed/YOUR_RENEW_WORLD_SCREEN_VIDEO_ID';
+                default:
+                    return '';
+            }
         default:
             return '';
     }
@@ -172,6 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const modalDescription = document.getElementById("modalDescription");
     const modalVideo = document.getElementById("modalVideo");
     const batteryAlternatives = document.getElementById("batteryAlternatives");
+    const screenAlternatives = document.getElementById("screenAlternatives");
 
     // Function to open modal with animation and content
     function openModal(equipment, i18nKey) {
@@ -199,9 +232,16 @@ document.addEventListener('DOMContentLoaded', () => {
             if (equipment === 'battery') {
                 // Show battery alternatives
                 batteryAlternatives.style.display = "flex";
+                screenAlternatives.style.display = "none"; // Hide screen alternatives
+            } else if (equipment === 'screen') {
+                // Show screen alternatives instead of opening modal
+                screenAlternatives.style.display = "flex";
+                batteryAlternatives.style.display = "none"; // Hide battery alternatives
             } else {
                 // Open modal directly for other equipment
                 openModal(equipment, this.dataset.i18n);
+                batteryAlternatives.style.display = "none"; // Hide battery alternatives
+                screenAlternatives.style.display = "none"; // Hide screen alternatives
             }
         });
     });
@@ -210,7 +250,13 @@ document.addEventListener('DOMContentLoaded', () => {
     alternativeButtons.forEach(button => {
         button.addEventListener("click", function() {
             const alternative = this.dataset.alternative;
-            openModal('battery', alternative);
+            const parentId = this.parentElement.id;
+            
+            if (parentId === "batteryAlternatives") {
+                openModal('battery', alternative);
+            } else if (parentId === "screenAlternatives") {
+                openModal('screen', alternative);
+            }
         });
     });
 
@@ -223,6 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
             modal.classList.remove('show');
             modalVideo.src = ""; // Stop video when closing modal
             batteryAlternatives.style.display = "none"; // Hide battery alternatives
+            screenAlternatives.style.display = "none"; // Hide screen alternatives
         }, 400);
     }
 
