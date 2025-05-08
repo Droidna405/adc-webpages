@@ -5,7 +5,7 @@ This project is a static webpage designed to provide resources and materials for
 ## Project Structure
 
 ```
-my-static-webpage
+adc-webpage
 ├── index.html          # Main entry point for the static webpage
 ├── css
 │   └── style.css      # Styles for the webpage
