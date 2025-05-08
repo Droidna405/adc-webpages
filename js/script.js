@@ -176,7 +176,7 @@ function getVideoUrl(equipment, alternative) {
         case 'audiobible':
             return 'https://www.youtube.com/embed/K5pTdR2cU5Q';
         case 'tablet':
-            return 'https://www.youtube.com/embed/YOUR_TABLET_VIDEO_ID';
+            return 'https://www.youtube.com/embed/rn91OeTA8Rk';
         case 'screen':
             switch (alternative) {
                 case 'watabaScreen':
