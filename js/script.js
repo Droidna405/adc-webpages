@@ -106,6 +106,8 @@ const translations = {
     }
 };
 
+let currentLanguage = 'en'; // Default language
+
 function translatePage(lang) {
     const elements = document.querySelectorAll('[data-i18n]');
     elements.forEach(element => {
@@ -115,84 +117,6 @@ function translatePage(lang) {
         }
     });
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    const langLinks = document.querySelectorAll('.language-links a');
-    langLinks.forEach(link => {
-        link.addEventListener('click', (event) => {
-            event.preventDefault();
-            const lang = link.dataset.lang;
-            translatePage(lang);
-            currentLanguage = lang; // Update current language
-        });
-    });
-
-    // Get the modal
-    const modal = document.getElementById("equipmentModal");
-
-    // Get the button that opens the modal
-    const equipmentButtons = document.querySelectorAll(".equipment-button");
-    const alternativeButtons = document.querySelectorAll(".alternative-button");
-
-    // Get the <span> element that closes the modal
-    const span = document.getElementsByClassName("close")[0];
-
-    // Get the modal title and description elements
-    const modalTitle = document.getElementById("modalTitle");
-    const modalDescription = document.getElementById("modalDescription");
-    const modalVideo = document.getElementById("modalVideo");
-
-    const batteryAlternatives = document.getElementById("batteryAlternatives");
-
-    // When the user clicks on an equipment button
-    equipmentButtons.forEach(button => {
-        button.addEventListener("click", function() {
-            const equipment = this.dataset.equipment;
-
-            if (equipment === 'battery') {
-                // Show battery alternatives
-                batteryAlternatives.style.display = "flex";
-            } else {
-                // Open modal directly for other equipment
-                openModal(equipment, this.dataset.i18n);
-            }
-        });
-    });
-
-    // When the user clicks on a battery alternative button
-    alternativeButtons.forEach(button => {
-        button.addEventListener("click", function() {
-            const alternative = this.dataset.alternative;
-            openModal('battery', alternative);
-        });
-    });
-
-    // Function to open the modal
-    function openModal(equipment, i18nKey) {
-        modal.style.display = "block";
-        modalTitle.textContent = translations[currentLanguage][i18nKey];
-        modalDescription.textContent = translations[currentLanguage][i18nKey + 'Desc'] || ''; // Use empty string if no description
-        modalVideo.src = getVideoUrl(equipment, i18nKey);
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function() {
-        modal.style.display = "none";
-        modalVideo.src = ""; // Stop video when closing modal
-        batteryAlternatives.style.display = "none"; // Hide battery alternatives
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-            modalVideo.src = ""; // Stop video when closing modal
-            batteryAlternatives.style.display = "none"; // Hide battery alternatives
-        }
-    }
-});
-
-let currentLanguage = 'en'; // Default language
 
 function getVideoUrl(equipment, alternative) {
     switch (equipment) {
@@ -225,3 +149,93 @@ function getVideoUrl(equipment, alternative) {
             return '';
     }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Language translation handling
+    const langLinks = document.querySelectorAll('.language-links a');
+    langLinks.forEach(link => {
+        link.addEventListener('click', (event) => {
+            event.preventDefault();
+            const lang = link.dataset.lang;
+            translatePage(lang);
+            currentLanguage = lang; // Update current language
+        });
+    });
+
+    // Modal elements
+    const modal = document.getElementById("equipmentModal");
+    const modalContent = modal.querySelector('.modal-content');
+    const equipmentButtons = document.querySelectorAll(".equipment-button");
+    const alternativeButtons = document.querySelectorAll(".alternative-button");
+    const closeBtn = document.querySelector(".close");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalDescription = document.getElementById("modalDescription");
+    const modalVideo = document.getElementById("modalVideo");
+    const batteryAlternatives = document.getElementById("batteryAlternatives");
+
+    // Function to open modal with animation and content
+    function openModal(equipment, i18nKey) {
+        // Set the modal content
+        modalTitle.textContent = translations[currentLanguage][i18nKey];
+        modalDescription.textContent = translations[currentLanguage][i18nKey + 'Desc'] || '';
+        modalVideo.src = getVideoUrl(equipment, i18nKey);
+        
+        // Show the modal with animation
+        modal.classList.add('show');
+        modalContent.style.opacity = 0;
+        modalContent.style.transform = 'scale(0.8)';
+        
+        setTimeout(() => {
+            modalContent.style.opacity = 1;
+            modalContent.style.transform = 'scale(1)';
+        }, 100);
+    }
+
+    // When the user clicks on an equipment button
+    equipmentButtons.forEach(button => {
+        button.addEventListener("click", function() {
+            const equipment = this.dataset.equipment;
+
+            if (equipment === 'battery') {
+                // Show battery alternatives
+                batteryAlternatives.style.display = "flex";
+            } else {
+                // Open modal directly for other equipment
+                openModal(equipment, this.dataset.i18n);
+            }
+        });
+    });
+
+    // When the user clicks on a battery alternative button
+    alternativeButtons.forEach(button => {
+        button.addEventListener("click", function() {
+            const alternative = this.dataset.alternative;
+            openModal('battery', alternative);
+        });
+    });
+
+    // Close modal function
+    function closeModal() {
+        modalContent.style.opacity = 0;
+        modalContent.style.transform = 'scale(0.8)';
+        
+        setTimeout(() => {
+            modal.classList.remove('show');
+            modalVideo.src = ""; // Stop video when closing modal
+            batteryAlternatives.style.display = "none"; // Hide battery alternatives
+        }, 400);
+    }
+
+    // When the user clicks on the close button
+    closeBtn.addEventListener('click', closeModal);
+    
+    // When the user clicks anywhere outside of the modal
+    window.addEventListener('click', function(event) {
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
+    
+    // Initialize with English
+    translatePage('en');
+});
