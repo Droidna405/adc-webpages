@@ -59,21 +59,21 @@ header .container {
 }
 
 /* Logo */
-.logo-wrapper {
-    flex: 0 0 auto;
-    width: 180px; /* Increased from 140px */
-    display: flex;
+/*.logo-wrapper {
+    flex: 0 0;
+    width: 250px; /* Increased from 140px */
+/*    display: flex;
     justify-content: center;
     margin: 0 20px 0 0;
 }
-
-.logo {
+*/
+/*.logo {
     max-width: 100%;
     height: auto;
     object-fit: contain;
     display: block;
 }
-
+*/
 /* Header Text Content */
 .header-content {
     flex: 1 1 auto;
@@ -545,25 +545,26 @@ footer p {
 }
 
 /* Carousel Styles */
-.carousel {
+/*
+    .carousel {
     position: relative;
-}
+    }
 
-.carousel-inner {
+    .carousel-inner {
     display: flex;
     overflow: hidden;
-}
+    }
 
-.carousel-item {
+    .carousel-item {
     flex: 0 0 100%;
     display: none;
-}
+    }
 
-.carousel-item.active {
+    .carousel-item.active {
     display: block;
-}
+    }
 
-.carousel-control {
+    .carousel-control {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -571,10 +572,10 @@ footer p {
     border: none;
     font-size: 2em;
     color: #EF3340; /* Jesus Film Project Red */
-    cursor: pointer;
+/*    cursor: pointer;
     padding: 0 10px;
-}
-
+    }
+*/
 .carousel-control.prev {
     left: 0;
 }
@@ -993,22 +994,22 @@ header .container {
 }
 
 .logo-wrapper {
-    display: flex;
+    /*display: flex;
     align-items: center;
     justify-content: center;
     flex: 0 0 auto; /* Prevent logo from growing/shrinking */
-    width: 140px; /* Fixed width */
-    min-width: 120px; /* Ensure minimum width */
-    margin-right: 20px; /* Add right margin */
+    width: 100px; /* Fixed width */
+    min-width: 150px; /* Ensure minimum width */
+    margin-right: 0px; /* Add right margin */
 }
 
-.logo {
+/*.logo {
     max-width: 100%;
     height: auto;
     object-fit: contain;
     display: block;
 }
-
+*/
 .header-content {
     display: flex;
     flex-direction: column;
@@ -1092,7 +1093,7 @@ header .container {
 }
 
 /* Logo wrapper - keep original with just essential fixes */
-.logo-wrapper {
+/*.logo-wrapper {
     flex: 0 0 auto;
     width: 160px; 
     min-width: 120px;
@@ -1101,14 +1102,14 @@ header .container {
     align-items: center;
     margin-right: 20px;
 }
-
-.logo {
+*/
+/* .logo {
     max-width: 120%;
     height: auto;
     object-fit: contain;
     display: block;
 }
-
+*/
 /* Header content - restore original width constraint */
 .header-content {
     flex: 1;
@@ -1135,7 +1136,7 @@ header .container {
     }
     
     .logo-wrapper {
-        margin-right: 0;
+        margin-right: 20px;
         margin-bottom: 10px;
     }
     
@@ -1144,4 +1145,133 @@ header .container {
         width: 100%; 
         text-align: center;
     }
+}
+
+/* LOGO SIZE FIX - ADD TO THE VERY END OF YOUR CSS FILE */
+
+.logo-wrapper {
+    width: 180px !important;
+}
+
+.logo {
+    width: 350px !important;
+    max-width: none !important;
+    height: auto !important;
+}
+
+@media (max-width: 768px) {
+    .logo-wrapper {
+        width: 500px !important;
+    }
+    
+    .logo {
+        width: 200px !important;
+    }
+}
+
+/* LOGO AND HEADER LAYOUT FIX - ADD TO END OF FILE TO OVERRIDE CONFLICTS */
+
+/* Clean up header container */
+header .container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+/* Fix logo wrapper and size */
+.logo-wrapper {
+    flex: 0 0 auto;
+    width: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+}
+
+/* Fix logo image itself */
+.logo {
+    max-width: none !important;
+    width: 160px !important; 
+    height: auto !important;
+    object-fit: contain;
+    display: block;
+}
+
+/* Fix header content width */
+.header-content {
+    flex: 1;
+    max-width: calc(100% - 220px);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-word;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    padding: 0;
+}
+
+/* Single consolidated mobile layout */
+@media (max-width: 768px) {
+    header .container {
+        flex-direction: column;
+        align-items: center;
+        width: 95%;
+        padding: 10px;
+    }
+    
+    .logo-wrapper {
+        margin: 0 0 15px 0;
+        width: auto;
+    }
+    
+    .logo {
+        width: 140px !important;
+    }
+    
+    .header-content {
+        max-width: 100%;
+        width: 100%;
+        text-align: center !important;
+    }
+    
+    .language-links {
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .language-links a {
+        flex: 1;
+        max-width: 110px;
+        padding: 8px 5px;
+        white-space: nowrap;
+    }
+    
+    .alternative-button {
+        background-color: #6C6C6C;
+    }
+}
+
+/* Clean up header with no logo */
+
+/* Add this to the end of your CSS file */
+.header-content {
+    max-width: 100% !important; 
+    text-align: center !important;
+    width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+}
+
+/* Remove any logo-related CSS to avoid conflicts */
+.logo-wrapper, .logo {
+    display: none !important;
 }
