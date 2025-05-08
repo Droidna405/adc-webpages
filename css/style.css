@@ -61,7 +61,7 @@ header .container {
 /* Logo */
 .logo-wrapper {
     flex: 0 0 auto;
-    width: 140px;
+    width: 180px; /* Increased from 140px */
     display: flex;
     justify-content: center;
     margin: 0 20px 0 0;
@@ -77,11 +77,11 @@ header .container {
 /* Header Text Content */
 .header-content {
     flex: 1 1 auto;
-    max-width: 70%;
-    text-align: left;
+    max-width: calc(100% - 220px); /* Adjusted for larger logo */
+    text-align: center;
     display: flex;
     flex-direction: column;
-    justify-content: left;
+    justify-content: center;
     overflow-wrap: break-word;
     word-wrap: break-word;
     word-break: break-word;
@@ -139,8 +139,8 @@ header .container {
     }
     
     .logo-wrapper {
+        width: 160px; /* Increased from 120px for mobile */
         margin: 0 0 10px 0;
-        width: 120px;
     }
     
     .header-content {

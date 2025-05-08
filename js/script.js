@@ -172,7 +172,7 @@ function getVideoUrl(equipment, alternative) {
                     return '';
             }
         case 'wifi':
-            return 'https://www.youtube.com/embed/YOUR_WIFI_VIDEO_ID';
+            return 'https://www.youtube.com/embed/SfA9vJ_Ilik';
         case 'audiobible':
             return 'https://www.youtube.com/embed/K5pTdR2cU5Q';
         case 'tablet':
