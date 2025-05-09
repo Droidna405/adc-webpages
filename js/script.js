@@ -30,13 +30,21 @@ const translations = {
         motorcycleBatteryCharging: "Charging via Motorcycle Battery",
         carBatteryCharging: "Charging via Car Battery",
         purposeTitle: "Purpose of the Site",
-        purposeDescription: "Welcome to our collection of training videos. Our goal is to provide high-quality, field-ready resources for partners.",
+        purposeDescription: "Welcome to our collection of JF equipment training videos. Our goal is to provide high-quality, field-ready resources for partners.",
         centerTitle: "JF Africa Distribution Center",
         centerSubtitle: "Ensuring Partners are Well Equipped for the Field",
         watabaScreen: "Wataba Projector Screen",
         watabaScreenDesc: "Learn how to set up and use the Wataba projector screen.",
         renewWorldScreen: "Renew World Screen",
-        renewWorldScreenDesc: "Learn how to set up and use the Renew World projector screen."
+        renewWorldScreenDesc: "Learn how to set up and use the Renew World projector screen.",
+        "50viewer": "50-Viewer Set Projector",
+        "vista200": "Vista 200 Set",
+        "eprojector": "E-Projector",
+        "renewWorldCarousel": "Renew World Outreach Tutorials",
+        "renewWorldCarouselTitle": "Renew World Outreach Tutorials",
+        "tutorial1": "Vista 200 Bright: Quick Start",
+        "tutorial2": "50 Viewer Set: Quick Start",
+        "tutorial3": "E Vista: Quick Start",
     },
     fr: {
         home: "Accueil",
@@ -68,14 +76,22 @@ const translations = {
         automobileAuxiliaryCharging: "Chargement via la prise auxiliaire de l'automobile",
         motorcycleBatteryCharging: "Chargement via la batterie de la moto",
         carBatteryCharging: "Chargement via la batterie de la voiture",
-        purposeTitle: "Objectif du Site",
-        purposeDescription: "Bienvenue dans notre collection de vidéos de formation. Notre objectif est de fournir des ressources de haute qualité et prêtes à l'emploi pour nos partenaires.",
+        purposeTitle: "Objectif du site",
+        purposeDescription: "Bienvenue dans notre collection de vidéos de formation sur l'équipement JF. Notre objectif est de fournir des ressources de haute qualité et prêtes à l'emploi pour les partenaires.",
         centerTitle: "Centre de Distribution JF Afrique",
         centerSubtitle: "Assurer que les partenaires sont bien équipés pour le terrain",
         watabaScreen: "Écran de Projecteur Wataba",
         watabaScreenDesc: "Apprenez à installer et à utiliser l'écran de projecteur Wataba.",
         renewWorldScreen: "Écran Renew World",
-        renewWorldScreenDesc: "Apprenez à installer et à utiliser l'écran de projecteur Renew World."
+        renewWorldScreenDesc: "Apprenez à installer et à utiliser l'écran de projecteur Renew World.",
+        "50viewer": "Projecteur Set 50-Viewer",
+        "vista200": "Set Vista 200",
+        "eprojector": "E-Projecteur",
+        "renewWorldCarousel": "Tutoriels Renew World Outreach",
+        "renewWorldCarouselTitle": "Tutoriels Renew World Outreach",
+        "tutorial1": "Vista 200 Bright : Démarrage rapide",
+        "tutorial2": "Set 50 Viewer : Démarrage rapide",
+        "tutorial3": "E Vista : Démarrage rapide",
     },
     pt: {
         home: "Início",
@@ -108,54 +124,66 @@ const translations = {
         motorcycleBatteryCharging: "Carregamento através da bateria da motocicleta",
         carBatteryCharging: "Carregamento através da bateria do carro",
         purposeTitle: "Objetivo do Site",
-        purposeDescription: "Bem-vindo à nossa coleção de vídeos de treinamento. Nosso objetivo é fornecer recursos de alta qualidade e prontos para uso em campo para nossos parceiros.",
+        purposeDescription: "Bem-vindo à nossa coleção de vídeos de treinamento de equipamentos JF. Nosso objetivo é fornecer recursos de alta qualidade e prontos para uso em campo para nossos parceiros.",
         centerTitle: "Centro de Distribuição JF África",
         centerSubtitle: "Garantindo que os parceiros estejam bem equipados para o campo",
         watabaScreen: "Tela de Projetor Wataba",
         watabaScreenDesc: "Aprenda a configurar e usar a tela de projetor Wataba.",
         renewWorldScreen: "Tela Renew World",
-        renewWorldScreenDesc: "Aprenda a configurar e usar a tela de projetor Renew World."
+        renewWorldScreenDesc: "Aprenda a configurar e usar a tela de projetor Renew World.",
+        "50viewer": "Projetor Set 50-Viewer",
+        "vista200": "Set Vista 200",
+        "eprojector": "E-Projetor",
+        "renewWorldCarousel": "Tutoriais Renew World Outreach",
+        "renewWorldCarouselTitle": "Tutoriais Renew World Outreach",
+        "tutorial1": "Vista 200 Bright: Início Rápido",
+        "tutorial2": "Set 50 Viewer: Início Rápido",
+        "tutorial3": "E Vista: Início Rápido",
     }
 };
 
 let currentLanguage = 'en'; // Default language
 
 function translatePage(lang) {
-    // First store the current language
-    currentLanguage = lang;
-    
-    // Translate all elements with data-i18n attributes
-    const elements = document.querySelectorAll('[data-i18n]');
-    elements.forEach(element => {
-        const key = element.dataset.i18n;
+    // Translate all elements with data-i18n
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
         if (translations[lang] && translations[lang][key]) {
-            element.textContent = translations[lang][key];
+            el.textContent = translations[lang][key];
         }
     });
-    
-    // Ensure all equipment buttons are translated
-    const equipmentButtons = document.querySelectorAll(".equipment-button");
-    equipmentButtons.forEach(button => {
-        const key = button.dataset.i18n;
+
+    // Translate all equipment and alternative buttons
+    document.querySelectorAll('.equipment-button, .alternative-button').forEach(btn => {
+        const key = btn.getAttribute('data-i18n');
         if (translations[lang] && translations[lang][key]) {
-            button.textContent = translations[lang][key];
-        }
-    });
-    
-    // Special handling for alternative buttons
-    const alternativeButtons = document.querySelectorAll(".alternative-button");
-    alternativeButtons.forEach(button => {
-        const key = button.dataset.i18n || button.dataset.alternative;
-        if (translations[lang] && translations[lang][key]) {
-            button.textContent = translations[lang][key];
+            btn.textContent = translations[lang][key];
         }
     });
 }
 
+// Example: Add event listeners for language links
+document.querySelectorAll('.language-links a').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const lang = this.getAttribute('data-lang');
+        translatePage(lang);
+    });
+});
+
 function getVideoUrl(equipment, alternative) {
     switch (equipment) {
         case 'projector':
-            return 'https://www.youtube.com/embed/6EgvwbFcahc';
+            switch (alternative) {
+                case '50viewer':
+                    return 'https://www.youtube.com/embed/YOUR_50VIEWER_VIDEO_ID';
+                case 'vista200':
+                    return 'https://www.youtube.com/embed/SfA9vJ_Ilik'; // <-- Use your previous Projector Set-up YouTube embed here
+                case 'eprojector':
+                    return 'https://www.youtube.com/embed/YOUR_EPROJECTOR_VIDEO_ID';
+                default:
+                    return '';
+            }
         case 'battery':
             switch (alternative) {
                 case 'electricity':
@@ -192,6 +220,11 @@ function getVideoUrl(equipment, alternative) {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Hide all alternatives on page load
+    document.getElementById("batteryAlternatives").style.display = "none";
+    document.getElementById("screenAlternatives").style.display = "none";
+    document.getElementById("projectorAlternatives").style.display = "none";
+
     // Language translation handling
     const langLinks = document.querySelectorAll('.language-links a');
     langLinks.forEach(link => {
@@ -238,19 +271,21 @@ document.addEventListener('DOMContentLoaded', () => {
         button.addEventListener("click", function() {
             const equipment = this.dataset.equipment;
 
+            // Hide all alternatives by default
+            batteryAlternatives.style.display = "none";
+            screenAlternatives.style.display = "none";
+            document.getElementById("projectorAlternatives").style.display = "none";
+
             if (equipment === 'battery') {
-                // Show battery alternatives
                 batteryAlternatives.style.display = "flex";
-                screenAlternatives.style.display = "none"; // Hide screen alternatives
             } else if (equipment === 'screen') {
-                // Show screen alternatives instead of opening modal
                 screenAlternatives.style.display = "flex";
-                batteryAlternatives.style.display = "none"; // Hide battery alternatives
+            } else if (equipment === 'projector') {
+                // Only show projector alternatives, do NOT open modal
+                document.getElementById("projectorAlternatives").style.display = "flex";
             } else {
-                // Open modal directly for other equipment
+                // For other equipment, open modal directly
                 openModal(equipment, this.dataset.i18n);
-                batteryAlternatives.style.display = "none"; // Hide battery alternatives
-                screenAlternatives.style.display = "none"; // Hide screen alternatives
             }
         });
     });
@@ -265,6 +300,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 openModal('battery', alternative);
             } else if (parentId === "screenAlternatives") {
                 openModal('screen', alternative);
+            } else if (parentId === "projectorAlternatives") {
+                if (alternative === "renewWorldCarousel") {
+                    openCarouselModal();
+                } else {
+                    openModal('projector', alternative);
+                }
             }
         });
     });
@@ -294,4 +335,68 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initialize with English
     translatePage('en');
+
+    // Add event listener for projector alternatives
+    const projectorAlternatives = document.getElementById("projectorAlternatives");
+    if (projectorAlternatives) {
+        projectorAlternatives.querySelectorAll(".alternative-button").forEach(button => {
+            button.addEventListener("click", function() {
+                const alt = this.dataset.alternative;
+                if (alt === "renewWorldCarousel") {
+                    openCarouselModal();
+                } else {
+                    openModal('projector', alt);
+                }
+            });
+        });
+    }
+
+    // Carousel logic
+    const carouselVideos = [
+        {
+            key: "tutorial1",
+            vimeo: "https://player.vimeo.com/video/182567575"
+        },
+        {
+            key: "tutorial2",
+            vimeo: "https://player.vimeo.com/video/xxxxxxxxx" // Replace with actual Vimeo link
+        },
+        {
+            key: "tutorial3",
+            vimeo: "https://player.vimeo.com/video/xxxxxxxxx" // Replace with actual Vimeo link
+        }
+    ];
+
+    function openCarouselModal() {
+        const modal = document.getElementById("carouselModal");
+        const carouselInner = modal.querySelector(".carousel-inner");
+        const carouselTitle = modal.querySelector("#carouselTitle");
+        carouselTitle.textContent = translations[currentLanguage]["renewWorldCarouselTitle"];
+        carouselInner.innerHTML = "";
+        carouselVideos.forEach((vid, idx) => {
+            const slide = document.createElement("div");
+            slide.className = "carousel-slide" + (idx === 0 ? " active" : "");
+            slide.innerHTML = `<div class="carousel-title">${translations[currentLanguage][vid.key]}</div>
+                <iframe src="${vid.vimeo}" width="560" height="315" frameborder="0" allowfullscreen></iframe>`;
+            carouselInner.appendChild(slide);
+        });
+        modal.classList.add("show");
+        setupCarouselControls(modal, carouselVideos.length);
+    }
+
+    function setupCarouselControls(modal, total) {
+        let current = 0;
+        const slides = modal.querySelectorAll(".carousel-slide");
+        const prevBtn = modal.querySelector(".carousel-control.prev");
+        const nextBtn = modal.querySelector(".carousel-control.next");
+        function show(idx) {
+            slides.forEach((s, i) => s.classList.toggle("active", i === idx));
+        }
+        prevBtn.onclick = () => { current = (current - 1 + total) % total; show(current); };
+        nextBtn.onclick = () => { current = (current + 1) % total; show(current); };
+        // Close modal on X
+        modal.querySelector(".close").onclick = () => { modal.classList.remove("show"); };
+        // Optional: close on background click
+        modal.onclick = e => { if (e.target === modal) modal.classList.remove("show"); };
+    }
 });
