@@ -178,7 +178,7 @@ function getVideoUrl(equipment, alternative) {
                 case '50viewer':
                     return 'https://www.youtube.com/embed/YOUR_50VIEWER_VIDEO_ID';
                 case 'vista200':
-                    return 'https://www.youtube.com/embed/SfA9vJ_Ilik'; // <-- Use your previous Projector Set-up YouTube embed here
+                    return 'https://www.youtube.com/embed/6EgvwbFcahc'; 
                 case 'eprojector':
                     return 'https://www.youtube.com/embed/YOUR_EPROJECTOR_VIDEO_ID';
                 default:
